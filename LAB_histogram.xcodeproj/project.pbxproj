@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		946B656C15DCB1C900BBFD90 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 946B656B15DCB1C900BBFD90 /* main.cpp */; };
 		946B656E15DCB1C900BBFD90 /* LAB_histogram.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 946B656D15DCB1C900BBFD90 /* LAB_histogram.1 */; };
+		946B657615DCB39300BBFD90 /* lab_histogram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 946B657415DCB39300BBFD90 /* lab_histogram.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		946B656715DCB1C800BBFD90 /* LAB_histogram */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LAB_histogram; sourceTree = BUILT_PRODUCTS_DIR; };
 		946B656B15DCB1C900BBFD90 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		946B656D15DCB1C900BBFD90 /* LAB_histogram.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = LAB_histogram.1; sourceTree = "<group>"; };
+		946B657415DCB39300BBFD90 /* lab_histogram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lab_histogram.cpp; sourceTree = "<group>"; };
+		946B657515DCB39300BBFD90 /* lab_histogram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lab_histogram.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,8 @@
 			children = (
 				946B656B15DCB1C900BBFD90 /* main.cpp */,
 				946B656D15DCB1C900BBFD90 /* LAB_histogram.1 */,
+				946B657415DCB39300BBFD90 /* lab_histogram.cpp */,
+				946B657515DCB39300BBFD90 /* lab_histogram.h */,
 			);
 			path = LAB_histogram;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				946B656C15DCB1C900BBFD90 /* main.cpp in Sources */,
+				946B657615DCB39300BBFD90 /* lab_histogram.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,9 +152,12 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "/usr/local/include/**";
+				LIBRARY_SEARCH_PATHS = "/usr/local/lib/**";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include/**";
 			};
 			name = Debug;
 		};
@@ -168,14 +177,21 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "/usr/local/include/**";
+				LIBRARY_SEARCH_PATHS = "/usr/local/lib/**";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include/**";
 			};
 			name = Release;
 		};
 		946B657215DCB1C900BBFD90 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				OTHER_LDFLAGS = (
+					"-lopencv_core",
+					"-lopencv_highgui",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -183,6 +199,10 @@
 		946B657315DCB1C900BBFD90 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				OTHER_LDFLAGS = (
+					"-lopencv_core",
+					"-lopencv_highgui",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
