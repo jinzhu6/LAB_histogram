@@ -11,13 +11,14 @@
 
   
 // Matrix M for converting RGB color space to XYZ color space:
-static const double kMatrixM[3][3] = {{0.436052025, 0.385081593, 0.143087414},
-  {0.222491598, 0.716886060, 0.060621486},
-  {0.013929122, 0.097097002, 0.714185470}};
+static const double kMatrixM[3][3] = {{0.4124, 0.3576, 0.1805},
+                                      {0.2126, 0.7152, 0.0722},
+                                      {0.0193, 0.1192, 0.9505}};
+
 // Matrix M's invert for converting XYZ to RGB color space:
-static const double kInvMatrixM[3][3] = {{ 3.134051341, -1.617027710, -0.490652209},
-  {-0.978762729, 1.916142228, 0.033449628},
-  {0.0719425771, -0.228971179, 1.405218305}};
+static const double kInvMatrixM[3][3] = {{3.2406, -1.5372, -0.4986},
+                                         {-0.9689, 1.8758, 0.0415},
+                                         {0.0557, -0.2040, 1.0570}};
 // Gamma adjust function.
 double LabHistogram::Gamma(double x) {
   if (x > 0.04045)
@@ -62,23 +63,23 @@ void LabHistogram::XYZ2RGB(double X, double Y, double Z, uchar* R, uchar* G, uch
   *B = XYZ[2] < 255 ? static_cast<uchar>(XYZ[2] + 0.5) : 255;
 }
 //Color reference.
-static const double ref_x = 96.4221;
+static const double ref_x = 95.047;
 static const double ref_y = 100.000;
-static const double ref_z = 82.5221;
+static const double ref_z = 108.883;
 // Adjust function for XYZ2LAB
 double LabHistogram::Revise(double x) {
-  if ( x > pow(6.0 / 29.0, 3))
+  if (x > 0.008856)
     x = pow(x, 1.0 / 3.0);
   else
-    x = (1.0 / 3.0) * (29.0 / 6.0) * (29.0 / 6.0) * x + (16.0 / 116.0);
+    x = (7.787 * x) + 0.137931;
   return x;
 }
 // Reverse adjust function for LAB2XYZ
 double LabHistogram::ReverseRevise(double x) {
-  if (x > 6.0 / 29.0)
+  if (pow(x, 3.0) > 0.008856)
     x = pow(x, 3.0);
   else
-    x = (x - 16.0 / 116.0) * 3 * pow(6.0 / 29.0, 2);
+    x = (x - 0.137931) / 7.787;
   return x;
 }
 // Convert XYZ to LAB color space.
