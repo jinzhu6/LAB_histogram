@@ -71,7 +71,7 @@ double LabHistogram::Revise(double x) {
   if (x > 0.008856)
     x = pow(x, 1.0 / 3.0);
   else
-    x = (7.787 * x) + 0.137931;
+    x = (7.787 * x) + double(16) / 116;
   return x;
 }
 // Reverse adjust function for LAB2XYZ
@@ -79,7 +79,7 @@ double LabHistogram::ReverseRevise(double x) {
   if (pow(x, 3.0) > 0.008856)
     x = pow(x, 3.0);
   else
-    x = (x - 0.137931) / 7.787;
+    x = (x - double(16) / 116) / 7.787;
   return x;
 }
 // Convert XYZ to LAB color space.
@@ -157,7 +157,7 @@ bool LabHistogram::ExtractHist(int row_block, int col_block) {
   int col_step = static_cast<int>(round(static_cast<float>(width_) / col_block));
   row_block_ = static_cast<int>(ceil(static_cast<float>(height_) / row_step));
   col_block_ = static_cast<int>(ceil(static_cast<float>(width_) / col_step));
-  int l_step = static_cast<int>(ceil(100 / 4));
+  int l_step = static_cast<int>(ceil(101 / 4));
   int a_step = static_cast<int>(ceil(256 / 8));
   int b_step = static_cast<int>(ceil(256 / 8));
   
