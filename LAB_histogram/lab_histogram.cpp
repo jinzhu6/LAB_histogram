@@ -157,9 +157,9 @@ bool LabHistogram::ExtractHist(int row_block, int col_block) {
   int col_step = static_cast<int>(round(static_cast<float>(width_) / col_block));
   row_block_ = static_cast<int>(ceil(static_cast<float>(height_) / row_step));
   col_block_ = static_cast<int>(ceil(static_cast<float>(width_) / col_step));
-  int l_step = static_cast<int>(ceil(101 / 4));
-  int a_step = static_cast<int>(ceil(256 / 8));
-  int b_step = static_cast<int>(ceil(256 / 8));
+  int l_step = static_cast<int>(ceil(double(101) / 4));
+  int a_step = static_cast<int>(ceil(double(256) / 8));
+  int b_step = static_cast<int>(ceil(double(256) / 8));
   
   for (int i = 0; i < row_block_; ++i) {
     for (int j = 0; j < col_block_; ++j) {
